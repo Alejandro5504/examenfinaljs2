@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/comun.css">
+</head>
+
+<body>
+
+
+    <label for="anno"> Escribe aquí el año en el que vives</label>
+    <input type="number" id="anno" required min="01" max="12">
+
+    <label for="mes"> Escribe aquí el mes en el que naciste</label>
+    <input type="number" id="mes" required min="01" max="12">
+
+    <button type="button" onclick="sSumar()">click</button>
+
+    <p id="resultado"></p>
+
+    <script src="./js/mes.js"></script>
+
+    <script>
+
+        const ANIO = document.getElementById("anno");
+        const MMES = document.getElementById("mes");
+
+
+        function sSumar(){
+
+        let anio2 = ANIO.value;
+        let mes2 = MMES.value;
+
+        let caracteres2 = (anio2 + mes2).split("");
+
+        let suma2 = 0;
+
+
+        for (let c2 of caracteres2) {
+            let n2 = parseInt(c2);
+            if (!isNaN(n2)) {
+                suma2 += n2;
+            }
+        }
+        const resultado = significado[suma2];
+
+        document.getElementById("resultado").innerHTML = `Tu número es <strong>${suma2}</strong>: ${resultado}`;
+      }
+
+    </script>
+
+
+</body>
+
+</html>

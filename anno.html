@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/comun.css">
+</head>
+
+<body>
+
+
+    <h1>Año Personal</h1>
+
+    <label for="anno"> Escribe aquí el año en el que vives</label>
+    <input type="number" id="anno" required min="1976" max="2011">
+
+    <label for="mes"> Escribe aquí el mes en el que naciste</label>
+    <input type="number" id="mes" required min="1" max="12">
+
+    <label for="dia"> Escribe aquí el día que naciste</label>
+    <input type="number" id="dia" required min="1" max="31">
+
+    <button type="button" onclick="sumarV()">click</button>
+
+    <p id="resultado"></p>
+
+    <script src="./js/annoP.js"></script>
+
+    <script>
+        const ANIO = document.getElementById("anno");
+        const MMES = document.getElementById("mes");
+        const DDIA = document.getElementById("dia");
+
+        function sumarV() {
+            let anio = ANIO.value.toString();
+            let mmes = MMES.value.toString();
+            let ddia = DDIA.value.toString();
+
+            let caracteres = (anio + mmes + ddia).split("");
+
+            let suma = 0;
+
+
+            for (let c of caracteres) {
+                let n = parseInt(c);
+                if (!isNaN(n)) {
+                    suma += n;
+                }
+            }
+
+            console.log(suma);
+
+            let numeroReducido = reducir(suma); // ejemplo: 1986 → 24 → 6
+            let texto = significado[numeroReducido] || "Número fuera de rango";
+
+            document.getElementById("resultado").innerHTML = `Tu número es <strong>${numeroReducido}</strong>: ${texto}`;
+
+            document.getElementById("resultado").innerHTML = `Tu número es <strong>${suma}</strong>: ${significado[9]}`;
+
+
+
+
+
+        }
+
+
+        function reducir(suma) {
+
+            suma = suma.toString().split("").reduce((acc, digit) => acc + parseInt(digit), 0);
+
+            console.log(suma);
+
+            return suma
+        }
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

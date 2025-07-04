@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="./css/comun.css">
+
+</head>
+
+<body>
+
+<h1>Año Calendario</h1>
+
+    <label for="anyo">Introduce la fecha de nacimiento</label>
+    <input type="date" id="anyo" required min="1976" max="2011">
+
+    <button type="button" onclick="calcular()">click</button>
+
+    <p id="respuesta"></p>
+
+
+    <script src="./js/calendario.js"></script>
+
+    <script>
+
+
+        function calcular() {
+
+            const ANNO = document.getElementById("anyo");
+
+            let anno = (ANNO.value);
+            let fecha = anno.replaceAll("-", "");
+
+            if (fecha >= 0) {
+
+                let hoy = new Date();
+                let yrCalendar = hoy.getFullYear();
+
+                document.getElementById("respuesta").innerHTML = "Estamos en: " + yrCalendar
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

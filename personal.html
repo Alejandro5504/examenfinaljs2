@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Numero Personal</title>
+     <link rel="stylesheet" href="./css/comun.css">
+
+</head>
+
+<body>
+
+    <h1>Número personal</h1>
+
+    <label for="dia">Introduce la fecha de nacimiento</label>
+    <input type="date" id="dia" required min="1" max="31">
+
+    <button type="button" onclick="explicar()">click</button>
+
+    <p id="significado"></p>
+
+    <script src="./js/personal.js"></script>
+
+    <script>
+
+
+        const DIA = document.getElementById("dia");
+
+        function explicar() {
+
+            let diaNacimiento = calcular();
+
+            let resultado = reducir(diaNacimiento);
+
+            document.getElementById("significado").innerHTML = `Tu número personal es: ${resultado}`;
+
+
+        }
+
+        function calcular() {
+
+            let dia = new Date(DIA.value);
+
+            let diaNacimiento = dia.getDate();
+
+            return diaNacimiento;
+
+        }
+
+        function reducir(diaNacimiento) {
+
+            let numeroReducido = diaNacimiento;
+
+            const maestros = [11, 22];
+
+            while (numeroReducido > 9 && !maestros.includes(numeroReducido)) {
+                let suma = 0;
+                //convierte los números a String y los incluye en un array
+
+                let digitos = numeroReducido.toString().split('');
+                for (let i = 0; i < digitos.length; i++) {
+                    suma += parseInt(digitos[i]);
+                }
+                numeroReducido = suma
+            }
+            return numeroReducido;
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

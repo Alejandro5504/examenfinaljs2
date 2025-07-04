@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Numero de destino</title>
+     <link rel="stylesheet" href="./css/comun.css">
+
+</head>
+
+<body>
+
+    <h1>Número del Destino</h1>
+
+    <label for="fecha">Introduce la fecha de nacimiento</label>
+    <input type="date" id="fecha" required min="01" max="12">
+
+    <button type="button" onclick="comparar()">click</button>
+
+
+    <p id="significado"></p>
+
+
+    <script src="./js/destino.js"></script>
+
+    <script>
+
+        const FECHA = document.getElementById("fecha");
+
+        function comparar() {
+
+            resultado = calcular();
+
+           document.getElementById("significado").innerHTML = "El número es: " + resultado + " y significa: " + significado[resultado];
+        
+        }
+
+
+        function calcular() {
+
+            let fecha = FECHA.value;
+            console.log(fecha);
+            let data = new Date(fecha);
+            console.log(data);
+            let digitos = fecha.replaceAll("-", "").split("").map(Number);
+            console.log(digitos);
+            let suma = 0;
+            console.log(suma);
+
+            for (let i = 0; i < digitos.length; i++) {
+
+                suma += digitos[i];
+
+            }
+
+            console.log(suma);
+
+            while (suma > 9) {
+                let nuevo = suma.toString().split("").map(Number);
+                let sumaNueva = 0;
+                for (let i = 0; i < nuevo.length; i++) {
+                    sumaNueva += nuevo[i];
+                }
+                suma = sumaNueva;
+            }
+
+            console.log(suma);
+            return suma;
+            console.log(sumaNueva);
+
+
+
+
+        }
+
+
+
+    </script>
+
+
+</body>
+
+</html>

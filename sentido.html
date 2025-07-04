@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Sentido</title>
+    <link rel="stylesheet" href="./css/comun.css">
+</head>
+<body>
+
+    <h1>Proyecto Sentido</h1>
+    <h2>Introduce tu nombre</h2>
+
+    <input type="text" id="nombre" required>
+    <button type="button" onclick="sumarVocales()">Click</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        const NOMBRE = document.getElementById("nombre");
+
+        const valoresVocales = {
+            A: 1,
+            E: 2,
+            I: 3,
+            O: 4,
+            U: 5
+        };
+
+        const significado = [
+            null, // índice 0 no se usa
+            "Independencia y liderazgo",
+            "Sensibilidad y cooperación",
+            "Expresión creativa",
+            "Estabilidad y orden",
+            "Libertad y cambio",
+            "Amor y responsabilidad",
+            "Reflexión y análisis",
+            "Éxito material",
+            "Humanitarismo y compasión"
+        ];
+
+        function reducir(numero) {
+            while (numero > 9) {
+                numero = numero.toString().split('').reduce((acc, d) => acc + parseInt(d), 0);
+            }
+            return numero;
+        }
+
+        function sumarVocales() {
+            let nombre = NOMBRE.value.trim().toUpperCase();
+            let letras = nombre.replace(/\s/g, '').split('');
+
+            let suma = 0;
+            for (let letra of letras) {
+                if (valoresVocales[letra]) {
+                    suma += valoresVocales[letra];
+                }
+            }
+
+            console.log("Suma total:", suma);
+
+            if (suma === 0) {
+                document.getElementById("resultado").textContent = "No se encontraron vocales.";
+                return;
+            }
+
+            let reducido = reducir(suma);
+            let texto = significado[reducido] || "No hay significado para ese número.";
+
+            document.getElementById("resultado").innerHTML = `Tu número es <strong>${reducido}</strong>: ${texto}`;
+        }
+    </script>
+
+</body>
+</html>

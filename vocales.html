@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento</title>
+     <link rel="stylesheet" href="./css/comun.css">
+
+</head>
+
+<body>
+
+    <h1> Número del Alma: </h1>
+
+    <label for="letras"> Escribe tu nombre y apellido: </label>
+    <input type="text" id="letras" required min="a" max="z">
+    <button type="button" onclick="explicar()">Click</button>
+    <p id="resultado"></p>
+
+    <script>
+
+        // Array con las vocales
+        const vocales = ["a", "e", "i", "o", "u"];
+
+        // Array con los valores asociados a cada vocal
+        const valores = [
+            { letra: "a", valor: 1 },
+            { letra: "e", valor: 2 },
+            { letra: "i", valor: 3 },
+            { letra: "o", valor: 4 },
+            { letra: "u", valor: 5 }
+        ];
+
+        // Array con los significados correspondientes a los números
+        const significado = [
+            "Este número no tiene significado",  
+            "Líder natural, independencia",     
+            "Trabajo en equipo, armonía",       
+            "Expresión creativa, comunicación", 
+            "Estabilidad, organización",       
+            "Cambio, libertad",                
+            "Amor, familia",                   
+            "Desarrollo espiritual, introspección", 
+            "Sabiduría, enseñanza"
+        ];
+
+        // Función para calcular el número del alma
+        function calcular() {
+            let LETRAS = document.getElementById("letras");  // Obtener el valor del input
+            let remplazo = LETRAS.value.replace(/\s/g, '').split('');  // Eliminar espacios y convertir en array
+
+            let nuevo = [];
+            let definitivo = 0;  // Iniciar la variable definitivo
+
+            // Recorrer las letras del nombre o apellido
+            for (let i = 0; i < remplazo.length; i++) {
+                if (vocales.includes(remplazo[i].toLowerCase())) {  // Si es una vocal
+                    let vocal = remplazo[i].toLowerCase();  // Convertir a minúscula
+                    let valor = valores.find(item => item.letra === vocal).valor;  // Buscar el valor de la vocal
+                    nuevo.push(valor);  // Agregar el valor al array 'nuevo'
+                }
+            }
+
+            // Sumar todos los valores de 'nuevo'
+            for (let i = 0; i < nuevo.length; i++) {
+                definitivo += nuevo[i];  // Acumulamos la suma
+            }
+
+            // Si el número es mayor que 8, sumamos sus dígitos hasta que sea un valor entre 1 y 9
+            while (definitivo > 9) {
+                definitivo = definitivo.toString().split('').reduce((sum, num) => sum + parseInt(num), 0);
+            }
+
+            console.log(definitivo);  // Ver el resultado en la consola
+
+            return definitivo;  // Devolver el número calculado
+        }
+
+        // Función que se llama cuando el usuario hace clic en el botón
+        function explicar() {
+            let solucion = calcular();  // Llamamos a la función calcular y obtenemos el resultado
+            console.log(solucion);  // Mostrar el resultado en la consola
+
+            // Usamos el número calculado para obtener el significado
+            let significadoResult = significado[solucion] || significado[0];  // Si el número es 0, se muestra el primer significado
+
+            // Mostrar el resultado en el elemento con id 'resultado'
+            document.getElementById("resultado").innerHTML = "El número del alma es: " + solucion + ". " + significadoResult;
+        }
+
+    </script>
+
+
+  
+
+</body>
+
+</html>

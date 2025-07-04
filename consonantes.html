@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento</title>
+     <link rel="stylesheet" href="./css/comun.css">
+
+</head>
+
+<body>
+
+    <h1> Número del Alma: </h1>
+
+    <label for="letras"> Escribe tu nombre y apellido: </label>
+    <input type="text" id="letras">
+    <button type="button" onclick="explicar()">Click</button>
+    <p id="resultado"></p>
+<script>
+
+    const vocales = ["a", "e", "i", "o", "u"];
+
+    const valores = [
+        { letra: "b", valor: 1 },
+        { letra: "c", valor: 2 },
+        { letra: "d", valor: 3 },
+        { letra: "f", valor: 4 },
+        { letra: "g", valor: 5 },
+        { letra: "h", valor: 6 },
+        { letra: "i", valor: 7 },
+        { letra: "j", valor: 8 },
+        { letra: "k", valor: 9 },
+        { letra: "l", valor: 0 },
+        { letra: "ll", valor: 1 },
+        { letra: "m", valor: 2 },
+        { letra: "n", valor: 3 },
+        { letra: "ny", valor: 4 },
+        { letra: "p", valor: 5 },
+        { letra: "q", valor: 6 },
+        { letra: "r", valor: 7 },
+        { letra: "s", valor: 8 },
+        { letra: "t", valor: 9 },
+        { letra: "v", valor: 0 },
+        { letra: "w", valor: 1 },
+        { letra: "x", valor: 2 },
+        { letra: "y", valor: 3 },
+        { letra: "z", valor: 4 },
+    ];
+
+    const significado = [
+        "Este número no tiene significado",
+        "Líder natural, independencia",
+        "Trabajo en equipo, armonía",
+        "Expresión creativa, comunicación",
+        "Estabilidad, organización",
+        "Cambio, libertad",
+        "Amor, familia",
+        "Desarrollo espiritual, introspección",
+        "Sabiduría, enseñanza"
+    ];
+
+    function calcular() {
+        let LETRAS = document.getElementById("letras");
+        let remplazo = LETRAS.value.replace(/\s/g, '').toLowerCase().split('');
+
+        let nuevo = [];
+        let definitivo = 0;
+
+        for (let i = 0; i < remplazo.length; i++) {
+            let letra = remplazo[i];
+            if (!vocales.includes(letra)) {
+                let coincidencia = valores.find(item => item.letra === letra);
+                if (coincidencia) {
+                    nuevo.push(coincidencia.valor);
+                }
+            }
+        }
+
+        for (let i = 0; i < nuevo.length; i++) {
+            definitivo += nuevo[i];
+        }
+
+        while (definitivo > 9) {
+            definitivo = definitivo.toString().split('').reduce((sum, num) => sum + parseInt(num), 0);
+        }
+
+        return definitivo;
+    }
+
+    function explicar() {
+        let solucion = calcular();
+        let significadoResult = significado[solucion] || significado[0];
+        document.getElementById("resultado").innerHTML = "El número del alma es: " + solucion + ". " + significadoResult;
+    }
+
+</script>
+
+
+
+
+</body>
+
+</html>

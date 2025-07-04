@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Numero Personal</title>
+     <link rel="stylesheet" href="./css/comun.css">
+
+</head>
+
+<body>
+
+    <h1>Número nombre</h1>
+
+    <label for="letra">Introduce el nombre completo:</label>
+    <input type="text" id="letra">
+
+    <button type="button" onclick="explicar()">Calcular</button>
+
+    <p id="significado"></p>
+
+    <script>
+
+        const NOMBRE = document.getElementById("letra");
+
+        const valores = [
+            { letra: "a", valor: 1 },
+            { letra: "b", valor: 2 },
+            { letra: "c", valor: 3 },
+            { letra: "d", valor: 4 },
+            { letra: "e", valor: 5 },
+            { letra: "f", valor: 6 },
+            { letra: "g", valor: 7 },
+            { letra: "h", valor: 8 },
+            { letra: "i", valor: 9 },
+            { letra: "j", valor: 10 },
+            { letra: "k", valor: 11 },
+            { letra: "l", valor: 12 },
+            { letra: "ll", valor: 13 },
+            { letra: "m", valor: 14 },
+            { letra: "n", valor: 15 },
+            { letra: "ñ", valor: 16 },
+            { letra: "o", valor: 17 },
+            { letra: "p", valor: 18 },
+            { letra: "q", valor: 19 },
+            { letra: "r", valor: 20 },
+            { letra: "s", valor: 21 },
+            { letra: "t", valor: 22 },
+            { letra: "u", valor: 23 },
+            { letra: "v", valor: 24 },
+            { letra: "w", valor: 25 },
+            { letra: "x", valor: 26 },
+            { letra: "y", valor: 27 },
+            { letra: "z", valor: 28 },
+        ];
+
+        function explicar() {
+            let resultado = calcularNumeroPersonal();
+            document.getElementById("significado").innerHTML = "Tu número personal es: " + resultado;
+        }
+
+        function calcularNumeroPersonal() {
+            let nombre = NOMBRE.value.trim().toLowerCase();  // Obtener el valor del input y convertir a minúsculas
+            let valorTotal = 0;
+
+            // Reemplazar los espacios y procesar letra por letra
+            let letras = nombre.replace(/\s+/g, '').split('');
+
+            for (let letra of letras) {
+                let valorLetra = obtenerValorLetra(letra);  // Función para obtener el valor correspondiente de la letra
+                if (valorLetra !== -1) {  // Si se encuentra la letra en el array de valores
+                    valorTotal += valorLetra;
+                }
+            }
+
+            // Reducir el valor a un solo dígito si es mayor que 9
+            while (valorTotal > 9) {
+                valorTotal = valorTotal.toString().split('').reduce((sum, num) => sum + parseInt(num), 0);
+            }
+
+            return valorTotal;
+        }
+
+        function obtenerValorLetra(letra) {
+            for (let obj of valores) {
+                if (obj.letra === letra) {
+                    return obj.valor;
+                }
+            }
+            return -1;  // Si no se encuentra la letra, devolver -1
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>
